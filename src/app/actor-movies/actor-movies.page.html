@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Filmographie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+  
+<ion-content>
+  
+    <!-- <ion-grid  >
+      <ion-row>
+        <ion-col  size-lg="3"size-md="4"size-sm="6"size-xs="12"*ngFor="let item of (moviesList) ">
+          <ion-card style="width: 200px" >
+           
+            <ion-item lines="none" class="poster">
+              <ion-img style="width: 200px" [src]="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/'+item.poster_path" ></ion-img>
+            </ion-item>
+            <ion-item  lines="none" (click)="showDetails(item.id)"  >
+              <h2 ><strong>{{item.title}}</strong></h2><br>
+              
+            </ion-item>
+            <ion-card-content>             
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      
+      
+    </ion-grid>  -->
+    <ion-list>
+      <ion-item button *ngFor="let item of (moviesList)" (click)="showDetails(item.id)" >
+        <ion-item lines="none" class="poster">
+          <ion-img style="width: 50px" [src]="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/'+item.poster_path" ></ion-img>
+        </ion-item>
+        <ion-label class="ion-text-wrap">
+          <strong>{{ item.title}}</strong><br>
+          <b>{{ item.release_date }}</b><br>          
+        </ion-label>
+      </ion-item>
+  
+    </ion-list>
+ 
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button  color="medium" >
+        <ion-icon name="chevron-up"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>  
+  </ion-content>
+  
+
+

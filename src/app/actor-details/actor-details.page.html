@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>{{actor.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+   <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{actor.name}}</ion-card-title>
+      <ion-card-subtitle>{{actor.known_as}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content text-center>
+      <div style="display: flex; align-items: center;justify-content: center;">
+        <img alt="image" src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ actor.profile_path }}"  />
+    </div>
+    
+      <p>{{actor.biography}}</p>
+      <ion-item lines="none">
+        <ion-icon name="star-half" slot="start"></ion-icon>
+        <ion-label>{{actor.popularity}}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="earth" slot="start"></ion-icon>
+        <ion-label style="text-transform: uppercase;"><b>{{actor.place_of_birth}}</b></ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label >{{actor.birthday}} {{actor.deathday}}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-chip (click)="showDetails(actor.id)">
+          <ion-icon name="tv-outline"  color="primary"></ion-icon>
+          <ion-label>Filmographie</ion-label>
+        </ion-chip>
+      </ion-item>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end"  (click)="addData(actor.id)">
+    <ion-fab-button color="warning">
+      <ion-icon name="star"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

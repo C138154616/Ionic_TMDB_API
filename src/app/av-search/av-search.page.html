@@ -1,0 +1,165 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button>
+          
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title><b>Recherche Avancée</b></ion-title>
+   
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid [fixed]="true">
+  <h6>Filtrer:</h6>
+  <ion-grid class="ignore-css" >
+    <ion-row class="ignore-css">
+      <ion-col class="ignore-css"><ion-item><ion-label position="fixed"> Par Genre :</ion-label> 
+        <ion-select [multiple]="true" [(ngModel)]="genres">
+         <ion-select-option value="Action">Action</ion-select-option>
+    
+         <ion-select-option value="Adventure">Adventure</ion-select-option>
+    
+         <ion-select-option value="Animation">Animation</ion-select-option>
+          
+         <ion-select-option value="Comedy">Comedy</ion-select-option>
+          
+         <ion-select-option value="Crime">Crime</ion-select-option>
+          
+         <ion-select-option value="Documentary">Documentary</ion-select-option>
+          
+         <ion-select-option value="Drama">Drama</ion-select-option>
+          
+         <ion-select-option value="Family">Family</ion-select-option>
+          
+         <ion-select-option value="Fantasy">Fantasy</ion-select-option>
+          
+         <ion-select-option value="History">History</ion-select-option>
+          
+         <ion-select-option value="Horror">Horror</ion-select-option>
+          
+         <ion-select-option value="Music">Music</ion-select-option>
+          
+         <ion-select-option value="Mystery">Mystery</ion-select-option>
+          
+         <ion-select-option value="Romance">Romance</ion-select-option>
+          
+         <ion-select-option value="Science Fiction">Science Fiction</ion-select-option>
+          
+         <ion-select-option value="TV Movie">TV Movie</ion-select-option>
+          
+         <ion-select-option value="Thriller">Thriller</ion-select-option>
+          
+         <ion-select-option value="War">War</ion-select-option>
+          
+         <ion-select-option value="Western">Western</ion-select-option>
+          </ion-select>
+
+        </ion-item></ion-col>
+      <ion-col class="ignore-css"><ion-item >
+        <ion-label position="floating"> Par Année :</ion-label> 
+        <ion-input type="number" [max]="2023" [min]="1895" [maxlength]="4" [(ngModel)]="year"></ion-input>
+      </ion-item></ion-col>
+
+      <ion-col class="ignore-css"><ion-item><ion-label position="fixed"> Trier Par :</ion-label> 
+        <ion-select [(ngModel)]="sort">
+           <ion-select-option value="popularity.asc">popularity.asc </ion-select-option>
+           <ion-select-option value="popularity.desc">popularity.desc </ion-select-option>
+           <ion-select-option value="release_date.asc">release_date.asc </ion-select-option>
+           <ion-select-option value="release_date.desc">release_date.desc </ion-select-option>
+           <ion-select-option value="revenue.asc">revenue.asc </ion-select-option>
+           <ion-select-option value="revenue.desc">revenue.desc </ion-select-option>
+           <ion-select-option value="primary_release_date.asc">primary_release_date.asc </ion-select-option>
+           <ion-select-option value="primary_release_date.desc">primary_release_date.desc </ion-select-option>
+           <ion-select-option value="original_title.asc">original_title.asc </ion-select-option>
+           <ion-select-option value="original_title.desc">original_title.desc </ion-select-option>
+           <ion-select-option value="vote_average.asc">vote_average.asc </ion-select-option>
+           <ion-select-option value="vote_average.desc">vote_average.desc </ion-select-option>
+           <ion-select-option value="vote_count.asc">vote_count.asc </ion-select-option>
+           <ion-select-option value="vote_count.desc">vote_count.desc </ion-select-option>
+        </ion-select>
+      </ion-item></ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="ignore-css">
+    <ion-row class="ignore-css">
+      <ion-col class="ignore-css"><ion-item><ion-label position="fixed"> Language (s):</ion-label> 
+        <ion-select [(ngModel)]="lang">
+           <ion-select-option value=""> All </ion-select-option>
+           <ion-select-option value="ar">ARABE </ion-select-option>
+           <ion-select-option value="en">ANGLAIS </ion-select-option>
+           <ion-select-option value="it">ITALIEN </ion-select-option>
+           <ion-select-option value="es">ESPAGNOL </ion-select-option>
+           <ion-select-option value="fr">FRANCAIS </ion-select-option>
+           <ion-select-option value="de">ALLEMAND </ion-select-option>
+           <ion-select-option value="zh">CHINOIS </ion-select-option>
+           <ion-select-option value="ja">JAPONAIS </ion-select-option>
+           <ion-select-option value="ko">COREÉNNE </ion-select-option>
+           <ion-select-option value="tr">TURC </ion-select-option>
+           <ion-select-option value="th">THAILANDAIS </ion-select-option>
+        </ion-select>
+      </ion-item></ion-col>    
+   
+    </ion-row>
+
+    <ion-item>
+      <ion-label position="fixed" >Mots Clés:</ion-label> 
+      <ion-input [(ngModel)]="keyword"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="getMovies()"><ion-label>Recherche</ion-label><ion-icon name="search"></ion-icon></ion-button>
+    <ion-grid  >
+      <ion-row>
+        <ion-col  size-lg="3"size-md="4"size-sm="6"size-xs="12" *ngFor="let item of (moviesList)">
+          <ion-card style="width: 300px" (click)="showDetails(item.id)" >
+           
+            <ion-item lines="none" class="poster">
+              <ion-img style="width: 300px" [src]="'https://image.tmdb.org/t/p/w600_and_h900_bestv2'+item.poster_path" ></ion-img>
+            </ion-item>
+            <ion-item  lines="none">
+              <h2 ><strong>{{item.title}}</strong></h2>
+            </ion-item>
+            <ion-card-content>
+             
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-grid> 
+  </ion-grid>
+</ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-tab-bar >
+      
+      <ion-tab-button tab="latest" (click)="goLatest()">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Acceuil</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="popular" (click)="goPopular()">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        <ion-label>Populaires</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="favorites" (click)="goFavorites()">
+        <ion-icon name="star-half-outline" ></ion-icon>
+        <ion-label>Favoris</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="actors" (click)="goActors()">
+        <ion-icon name="ribbon-outline" ></ion-icon>
+        <ion-label>Acteurs</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>

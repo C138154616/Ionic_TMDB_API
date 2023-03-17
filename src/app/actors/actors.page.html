@@ -1,0 +1,94 @@
+<ion-header translucent>
+
+  <ion-toolbar >
+    <ion-title><b>Acteurs</b></ion-title>  
+  <ion-button  icon-only *ngIf="!isSearchBarOpened " (click)="isSearchBarOpened =true" slot="end" color="light">
+      <ion-icon name="search" color="primary"></ion-icon>
+  </ion-button>  
+  </ion-toolbar>
+
+  <ion-row>
+    <ion-col>      
+        <ion-searchbar *ngIf="isSearchBarOpened " showCancelButton="true" (ionCancel)="isSearchBarOpened=false" (keyup.enter)="getMovies()"  [(ngModel)]="title"></ion-searchbar>
+    </ion-col>     
+  </ion-row>
+
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="isSearchBarOpened " showCancelButton="true" (ionCancel)="isSearchBarOpened=false">
+    <ion-item button *ngFor="let item of (moviesList)" (click)="showDetails(item.id)">
+      <ion-avatar slot="start">
+         <img [src]="'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/'+item.profile_path"> 
+      </ion-avatar>
+ 
+      <ion-label class="ion-text-wrap">
+        <strong>{{ item.title}}{{ item.name}}</strong>
+        <p>{{ item.Year }}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+  <!-- <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+  <ion-grid  >
+    <ion-row>
+      <ion-col  size-lg="2"size-md="2"size-sm="4"size-xs="6"*ngFor="let item of (poplist) ">
+        <ion-card style="width: 120px ; height :180px"  (click)="showDetails(item.id)" >
+         
+          <ion-item lines="none" class="poster">
+            <ion-img  [src]="'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/'+item.profile_path" ></ion-img>
+          </ion-item>
+          <ion-item  lines="none" class="ion-text-center" >
+            <h7><strong>{{item.title}}{{ item.name}}</strong></h7>
+            
+          </ion-item>
+          <ion-card-content>           
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    
+  </ion-grid> 
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="list"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button>
+        <ion-icon name="chevron-up" (click)="scrollToTop()"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="goSearch()" color="warning">
+        <ion-icon name="search"></ion-icon>
+      </ion-fab-button>      
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tab-bar >
+      
+      <ion-tab-button tab="latest" (click)="goLatest()">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Acceuil</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="popular" (click)="goPopular()">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        <ion-label>Populaires</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="favorites" (click)="goFavorites()">
+        <ion-icon name="star-half-outline" ></ion-icon>
+        <ion-label>Favoris</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="actors" (click)="goActors()">
+        <ion-icon name="ribbon-outline" ></ion-icon>
+        <ion-label>Acteurs</ion-label>
+      </ion-tab-button>
+      
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>

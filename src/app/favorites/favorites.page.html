@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Choisir le type de Favoris" [(ngModel)]="selected" (ionChange)="loadData()">
+        <ion-select-option value="movie">Movies</ion-select-option>
+        <ion-select-option value="actor">Actor</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+<div *ngIf="selected === 'actor'">
+<ion-item  *ngFor="let items of act;let i =index" >
+
+  <ion-avatar slot="start">
+    <img [src]="'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'+items.profile_path"> 
+ </ion-avatar>
+
+ <ion-label class="ion-text-wrap" (click)="showActorDetails(items.id)">
+   <strong>{{ items.name}}</strong>
+  
+ </ion-label>
+        <ion-button color="danger" (click)="removeItem(i)&&presentAlert()"><ion-icon name="trash"></ion-icon></ion-button>
+
+</ion-item>
+</div>
+<div *ngIf="selected === 'movie'">
+  <ion-item  *ngFor="let items of movie;let i =index" >
+  
+    <ion-avatar slot="start">
+      <img [src]="'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'+items.poster_path"> 
+   </ion-avatar>
+  
+   <ion-label class="ion-text-wrap" (click)="showMovieDetails(items.id)">
+     <strong>{{ items.title}}</strong>
+    
+   </ion-label>
+          <ion-button color="danger" (click)="removeItem1(i)&&presentAlert1()"><ion-icon name="trash"></ion-icon></ion-button>
+  
+  </ion-item>
+</div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-tab-bar >
+      
+      <ion-tab-button tab="latest" (click)="goLatest()">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Acceuil</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="popular" (click)="goPopular()">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        <ion-label>Populaires</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="favorites">
+        <ion-icon name="star-half-outline" ></ion-icon>
+        <ion-label>Favoris</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="actors" (click)="goActors()">
+        <ion-icon name="ribbon-outline" ></ion-icon>
+        <ion-label>Acteurs</ion-label>
+      </ion-tab-button>
+      
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>
